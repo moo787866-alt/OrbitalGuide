@@ -33,7 +33,9 @@ jobs:
             echo "sdkmanager was not found"
             exit 1
           fi
-          yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" --licenses
+          set +o pipefail
+yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" --licenses
+set -o pipefail
           "$SDKMANAGER" --sdk_root="$SDK_ROOT" \
             "platform-tools" \
             "platforms;android-35" \
