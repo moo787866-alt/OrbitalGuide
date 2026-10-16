@@ -24,7 +24,7 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Install Android SDK packages
+       - name: Install Android SDK packages
         shell: bash
         run: |
           SDK_ROOT="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
@@ -33,9 +33,7 @@ jobs:
             echo "sdkmanager was not found"
             exit 1
           fi
-          set +o pipefail
-yes | "$SDKMANAGER" --sdk_root="$SDK_ROOT" --licenses
-set -o pipefail
+          "$SDKMANAGER" --sdk_root="$SDK_ROOT" --licenses </dev/null || true
           "$SDKMANAGER" --sdk_root="$SDK_ROOT" \
             "platform-tools" \
             "platforms;android-35" \
